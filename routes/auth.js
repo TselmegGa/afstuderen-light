@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
   res.json(
       {
           success: true,
-          token: token
+          jwt: token
         });
 
 });
@@ -23,7 +23,11 @@ router.post('/login', (req, res) => {
     //database insert
   
     const token = generateAccessToken({ username: req.body.username });
-    res.json(token);
+    res.json(
+      {
+          success: true,
+          jwt: token
+        });
   
 });
 module.exports = router;
