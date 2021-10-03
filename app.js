@@ -11,6 +11,7 @@ var jwtAuth = require('./middleware/jwt');
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
+var db = require("./model/sequelize");
 
 var app = express();
 
@@ -20,6 +21,8 @@ dotenv.config();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+db.sequelize.sync();
 
 app.use(cors());
 app.use(logger('dev'));
