@@ -42,12 +42,15 @@ exports.create = (req, res) => {
       // Save Tutorial in the database
       User.create(user)
         .then(data => {
-          res.send(data);
+          res.json({
+            success: true,
+            model: data
+          });
         })
         .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the Tutorial."
+          res.status(500).json({
+            succes: false,
+            error: "there is an error occurred"
           });
         });
 };
@@ -64,16 +67,21 @@ exports.findOne = (req, res) => {
     User.findByPk(id)
       .then(data => {
         if (data) {
-          res.send(data);
+          res.json({
+            success: true,
+            model: data
+          });
         } else {
-          res.status(404).send({
-            message: `Cannot find User with id=${id}.`
+          res.status(404).json({
+            succes: false,
+            error: "Cannot find user with id="+ id
           });
         }
       })
       .catch(err => {
-        res.status(500).send({
-          message: "Error retrieving User with id=" + id
+        res.status(500).json({
+          succes: false,
+          error: "Error trying to get user with id="+ id
         });
       });
 };
