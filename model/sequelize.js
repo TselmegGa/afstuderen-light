@@ -11,12 +11,18 @@ var db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.address = require("./address")(sequelize, Sequelize);
 db.user = require("./user")(sequelize, Sequelize);
-db.admin = require("./admin")(sequelize, Sequelize);
-db.price = require("./price")(sequelize, Sequelize);
-db.car = require("./car")(sequelize, Sequelize, db.price);
-db.car_history = require("./car.history")(sequelize, Sequelize, db.car);
-db.user_history = require("./user.history")(sequelize, Sequelize, db.user, db.car);
+db.car = require("./car")(sequelize, Sequelize);
+db.car_history = require("./car.history")(sequelize, Sequelize);
+db.user_history = require("./user.history")(sequelize, Sequelize);
+
+db.car.hasMany(db.car_history);
+db.car_history.belongsTo(db.car);
+db.address.hasOne(db.user);
+db.user.belongsTo(db.address);
+db.user.hasMany(db.user_history);
+db.user_history.belongsTo(db.user);
 
 
 

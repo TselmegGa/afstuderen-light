@@ -1,6 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("User", {
-  name: {
+  firstname: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastname: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -17,13 +21,15 @@ module.exports = (sequelize, Sequelize) => {
     allowNull: false,
      defaultValue: true
   },
+  role: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
   licence: {
     type: Sequelize.BOOLEAN,
     allowNull: false, 
     defaultValue: true
-  },
-  address: {
-    type: Sequelize.STRING
   }
 });
 return User;

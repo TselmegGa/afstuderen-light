@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, Car) => {
+module.exports = (sequelize, Sequelize) => {
   const CarHistory = sequelize.define("CarHistory", { 
   start: {
     type: Sequelize.STRING,
@@ -19,19 +19,7 @@ module.exports = (sequelize, Sequelize, Car) => {
   distance: {
   type: Sequelize.DOUBLE,
   allowNull: false
-},
-
-  car_id: {
-    type: Sequelize.INTEGER,
-
-    references: {
-      // This is a reference to another model
-      model: Car,
-
-      // This is the column name of the referenced model
-      key: 'id',
-    }
-  }
+}
 });
 return CarHistory;
 }

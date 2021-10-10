@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize, User, Car) => {
+module.exports = (sequelize, Sequelize) => {
   const UserHistory = sequelize.define("UserHistory", {
   price: {
     type: Sequelize.DOUBLE,
@@ -23,29 +23,7 @@ module.exports = (sequelize, Sequelize, User, Car) => {
   distance: {
   type: Sequelize.DOUBLE,
   allowNull: false
-},
-  user_id: {
-    type: Sequelize.INTEGER,
-
-    references: {
-      // This is a reference to another model
-      model: User,
-
-      // This is the column name of the referenced model
-      key: 'id',
-    }
-  },
-  car_id: {
-    type: Sequelize.INTEGER,
-
-    references: {
-      // This is a reference to another model
-      model: Car,
-
-      // This is the column name of the referenced model
-      key: 'id',
-    }
-  }
+}
 });
 return UserHistory;
  }

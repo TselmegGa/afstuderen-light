@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var controller = require('../controller/user.controller');
+var controller = require('../controller/car.controller');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   controller.findAll(req, res);
 });
 router.post('/', function(req, res, next) {
-  res.send('respond with a resource');
+  controller.create(req, res);
 });
 
 router.get('/:id', function(req, res, next) {
