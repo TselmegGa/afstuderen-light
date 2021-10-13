@@ -8,35 +8,35 @@ exports.create = (req, res) => {
     // Validate request
     if (!req.body.type) {
         res.status(400).json({
-          succes: false,
+          success: false,
           error: "Type can not be empty!"
         });
         return;
     }
     if (!req.body.brand) {
       res.status(400).json({
-        succes: false,
+        success: false,
         error: "Brand can not be empty!"
       });
       return;
     }
     if (!req.body.wheelchair) {
         res.status(400).json({
-          succes: false,
+          success: false,
           error: "Wheelchair suitibilty can not be empty!"
         });
         return;
     }
     if (!req.body.price) {
       res.status(400).json({
-        succes: false,
+        success: false,
         error: "Price can not be empty!"
       });
       return;
     }
     if (!req.body.name) {
       res.status(400).json({
-        succes: false,
+        success: false,
         error: "Name can not be empty!"
       });
       return;
@@ -59,7 +59,7 @@ exports.create = (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-      succes: false,
+      success: false,
       error: "Failed to create car!"
       });
     });
@@ -78,7 +78,7 @@ Car.findAll()
   })
   .catch(err => {
     res.status(500).json({
-      succes: false,
+      success: false,
       error: "Error trying to get all Car" 
     });
   });
@@ -99,14 +99,14 @@ exports.findOne = (req, res) => {
           
         } else {
           res.status(404).json({
-            succes: false,
+            success: false,
             error: "Cannot find Car with id="+ id
           });
         }
       })
       .catch(err => {
         res.status(500).json({
-          succes: false,
+          success: false,
           error: "Error trying to get Car with id="+ id
         });
       });
@@ -121,19 +121,19 @@ exports.update = (req, res) => {
     .then(num => {
       if (num == 1) {
         res.json({
-          succes: true,
+          success: true,
           message: "Car was updated successfully."
         });
       } else {
         res.status(500).json({
-          succes: false,
+          success: false,
           error: "Error while updating to get Car" 
         });
       }
     })
     .catch(err => {
       res.status(500).json({
-        succes: false,
+        success: false,
         error: "Error trying to update Car" 
       });
     });
@@ -150,19 +150,19 @@ exports.delete = (req, res) => {
     .then(num => {
       if (num == 1) {
         res.json({
-          succes: true,
+          success: true,
           message: "Car was deleted successfully!"
         });
       } else {
         res.status(500).json({
-          succes: false,
+          success: false,
           error: "Error trying to delete Car" 
         });
       }
     })
     .catch(err => {
       res.status(500).json({
-        succes: false,
+        success: false,
         error: "Error trying to delete Car" 
       });
     });

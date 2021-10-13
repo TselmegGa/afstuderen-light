@@ -9,28 +9,28 @@ exports.create = (req, res) => {
     // Validate request
     if (!req.body.firstname) {
         res.status(400).json({
-          succes: false,
+          success: false,
           error: "First Name can not be empty!"
         });
         return;
       }
       if (!req.body.lastname) {
         res.status(400).json({
-          succes: false,
+          success: false,
           error: "Last Name can not be empty!"
         });
         return;
       }
       if (!req.body.email) {
         res.status(400).json({
-          succes: false,
+          success: false,
           error: "Email can not be empty!"
         });
         return;
       }
       if (!req.body.password) {
         res.status(400).json({
-          succes: false,
+          success: false,
           error: "Password can not be empty!"
         });
         return;
@@ -47,7 +47,7 @@ exports.create = (req, res) => {
 
       }).catch(err => {
         res.status(500).json({
-          succes: false,
+          success: false,
           error: "Failed to create address"
         });
       });
@@ -80,7 +80,7 @@ function create(req, res, id){
           })
           .catch(err => {
             res.status(500).json({
-              succes: false,
+              success: false,
               error: "Failed to create user"
             });
           });
@@ -97,7 +97,7 @@ exports.findAll = (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        succes: false,
+        success: false,
         error: "Error trying to get all user" 
       });
     });
@@ -121,21 +121,21 @@ exports.findOne = (req, res) => {
           })
           .catch(err => {
             res.status(500).json({
-              succes: false,
+              success: false,
               error: "Error trying to get address" 
             });
           });
           
         } else {
           res.status(404).json({
-            succes: false,
+            success: false,
             error: "Cannot find user with id="+ id
           });
         }
       })
       .catch(err => {
         res.status(500).json({
-          succes: false,
+          success: false,
           error: "Error trying to get user with id="+ id
         });
       });
@@ -157,14 +157,14 @@ exports.findOneByEmail = (req, res) => {
             });
           }else {
             res.status(404).json({
-              succes: false,
+              success: false,
               error: "Cannot find address"
             });
           }
         })
         .catch(err => {
           res.status(500).json({
-            succes: false,
+            success: false,
             error: "Error trying to get address" 
           });
         });
@@ -178,14 +178,14 @@ exports.findOneByEmail = (req, res) => {
         
       } else {
         res.status(404).json({
-          succes: false,
+          success: false,
           error: "Cannot find user"
         });
       }
     })
     .catch(err => {
       res.status(500).json({
-        succes: false,
+        success: false,
         error: "Error trying to get user"
       });
     });
@@ -207,7 +207,7 @@ exports.update = (req, res) => {
           })
           .catch(err => {
             res.status(500).json({
-              succes: false,
+              success: false,
               error: "Error trying to create address" 
             });
           });
@@ -218,14 +218,14 @@ exports.update = (req, res) => {
               update(req, res)
             }else {
               res.status(500).json({
-                succes: false,
+                success: false,
                 error: "Error while updating to get address" 
               });
             }
           })
           .catch(err => {
             res.status(500).json({
-              succes: false,
+              success: false,
               error: "Error trying to update address"
             });
           });
@@ -244,19 +244,19 @@ function update(req, res){
     .then(num => {
       if (num == 1) {
         res.json({
-          succes: true,
+          success: true,
           message: "User was updated successfully."
         });
       } else {
         res.status(500).json({
-          succes: false,
+          success: false,
           error: "Error while updating to get user" 
         });
       }
     })
     .catch(err => {
       res.status(500).json({
-        succes: false,
+        success: false,
         error: "Error trying to update user" 
       });
     });
@@ -272,12 +272,12 @@ exports.delete = (req, res) => {
     .then(num => {
       if (num == 1) {
         res.json({
-          succes: true,
+          success: true,
           message: "User was deleted successfully!"
         });
       } else {
         res.status(500).json({
-          succes: false,
+          success: false,
           error: "Error trying to delete user" 
         });
       }

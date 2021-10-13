@@ -16,13 +16,13 @@ exports.create = (req, res) => {
         });
       }).catch(err => {
         res.status(500).json({
-          succes: false,
+          success: false,
           error: "Failed to create car history"
         });
       });
     }).catch(err => {
     res.status(500).json({
-      succes: false,
+      success: false,
       error: "Failed to create user history"
     });
   })
@@ -38,7 +38,7 @@ exports.findAllCarHistory = (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        succes: false,
+        success: false,
         error: "Error trying to get all user" 
       });
     });
@@ -53,7 +53,7 @@ exports.findAllCarHistoryById = (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        succes: false,
+        success: false,
         error: "Error trying to get all user" 
       });
     });
@@ -73,19 +73,19 @@ exports.findUserHistoryById = (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        succes: false,
+        success: false,
         error: "Error trying to get all user history" 
       });
     });
   }else{
     res.status(400).json({
-      succes: false,
+      success: false,
       error: "User must set privacy off to view history" 
     });
   }
   }).catch(err => {
     res.status(500).json({
-      succes: false,
+      success: false,
       error: "Error trying to get all user"
     });
   });
