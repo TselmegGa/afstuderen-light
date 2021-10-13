@@ -48,7 +48,7 @@ exports.create = (req, res) => {
       }).catch(err => {
         res.status(500).json({
           succes: false,
-          error: err
+          error: "Failed to create address"
         });
       });
       }else{
@@ -81,7 +81,7 @@ function create(req, res, id){
           .catch(err => {
             res.status(500).json({
               succes: false,
-              error: err
+              error: "Failed to create user"
             });
           });
 }
@@ -176,7 +176,7 @@ exports.update = (req, res) => {
           .catch(err => {
             res.status(500).json({
               succes: false,
-              error: "Error trying to update address" + err + data.AddressId
+              error: "Error trying to update address"
             });
           });
         }

@@ -17,13 +17,13 @@ exports.create = (req, res) => {
       }).catch(err => {
         res.status(500).json({
           succes: false,
-          error: err
+          error: "Failed to create car history"
         });
       });
     }).catch(err => {
     res.status(500).json({
       succes: false,
-      error: err
+      error: "Failed to create user history"
     });
   })
       
@@ -74,7 +74,7 @@ exports.findUserHistoryById = (req, res) => {
     .catch(err => {
       res.status(500).json({
         succes: false,
-        error: "Error trying to get all user history" +err
+        error: "Error trying to get all user history" 
       });
     });
   }else{
@@ -86,7 +86,7 @@ exports.findUserHistoryById = (req, res) => {
   }).catch(err => {
     res.status(500).json({
       succes: false,
-      error: "Error trying to get all user" +err
+      error: "Error trying to get all user"
     });
   });
   

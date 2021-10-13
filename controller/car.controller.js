@@ -60,7 +60,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).json({
       succes: false,
-      error: err
+      error: "Failed to create car!"
       });
     });
     
