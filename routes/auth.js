@@ -12,16 +12,7 @@ router.post('/register', (req, res) => {
   controller.create(req, res);
 });
 
-router.post('/login', (req, res) => {
-
-    //database insert
-  
-    const token = generateAccessToken({ email: req.body.email });
-    res.json(
-      {
-          success: true,
-          jwt: token
-        });
-  
+router.post('/login', (req, res) => {  
+  controller.findOneByEmail(req, res);
 });
 module.exports = router;

@@ -68,7 +68,7 @@ function create(req, res, id){
           privacy: req.body.privacy,
           AddressId: id,
         };
-        token =  jwt.sign({email: req.body.email}, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
+        token =  jwt.sign({email: user.email,  role: user.role }, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
         // Save User in the database
         User.create(user)
           .then(data => {
@@ -139,6 +139,56 @@ exports.findOne = (req, res) => {
           error: "Error trying to get user with id="+ id
         });
       });
+};
+exports.findOneByEmail = (req, res) => {
+  const id = req.params.id;
+  
+  User.findOne({ where: { email: req.body.email, password: req.body.password } })
+    .then(data => {
+      if (data) {
+        const accessToken = jwt.sign({ email: data.email,  role: data.role }, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+        if(data.AddressId){
+        Address.findByPk(data.AddressId).then(address => {
+          if (address) {
+            res.json({
+              success: true,
+              model: {data, address},
+              jwt: accessToken
+            });
+          }else {
+            res.status(404).json({
+              succes: false,
+              error: "Cannot find address"
+            });
+          }
+        })
+        .catch(err => {
+          res.status(500).json({
+            succes: false,
+            error: "Error trying to get address" 
+          });
+        });
+      } else {
+        res.json({
+          success: true,
+          model: data,
+          jwt: accessToken
+        });
+      }
+        
+      } else {
+        res.status(404).json({
+          succes: false,
+          error: "Cannot find user"
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        succes: false,
+        error: "Error trying to get user"
+      });
+    });
 };
 
 // Update a User by the id in the request
