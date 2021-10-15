@@ -194,7 +194,8 @@ exports.findOneByEmail = (req, res) => {
 // Update a User by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
-  const email = db.parseJwt(req.body.token).email;
+  const token = req.body.token || req.param('token') || req.headers['x-access-token'];
+  const email = db.parseJwt(token).email;
   
   User.findByPk(id)
       .then(data => {
@@ -272,7 +273,8 @@ function update(req, res){
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
-  const email = db.parseJwt(req.body.token).email;
+  const token = req.body.token || req.param('token') || req.headers['x-access-token'];
+  const email = db.parseJwt(token).email;
   User.findByPk(id)
       .then(data => {
         if(data.email === email){

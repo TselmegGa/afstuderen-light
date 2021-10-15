@@ -6,7 +6,8 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Car
 exports.create = (req, res) => {
     // Validate request
-    const role = db.parseJwt(req.body.token).role;
+    const token = req.body.token || req.param('token') || req.headers['x-access-token'];
+    const role = db.parseJwt(token).role;
     if (role == 1) {
       res.status(400).json({
         success: false,
@@ -123,7 +124,8 @@ exports.findOne = (req, res) => {
 
 // Update a Car by the id in the request
 exports.update = (req, res) => {
-  const role = db.parseJwt(req.body.token).role;
+  const token = req.body.token || req.param('token') || req.headers['x-access-token'];
+  const role = db.parseJwt(token).role;
   if (role == 1) {
     res.status(400).json({
       success: false,
@@ -159,7 +161,8 @@ exports.update = (req, res) => {
 // Delete a Car with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
-  const role = db.parseJwt(req.body.token).role;
+  const token = req.body.token || req.param('token') || req.headers['x-access-token'];
+  const role = db.parseJwt(token).role;
   if (role == 1) {
     res.status(400).json({
       success: false,
