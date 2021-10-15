@@ -6,6 +6,14 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Car
 exports.create = (req, res) => {
     // Validate request
+    const role = db.parseJwt(req.body.token).role;
+    if (role == 1) {
+      res.status(400).json({
+        success: false,
+        error: "You dont have permission"
+      });
+      return;
+    }
     if (!req.body.type) {
         res.status(400).json({
           success: false,
@@ -41,6 +49,7 @@ exports.create = (req, res) => {
       });
       return;
     }
+    
     // Create a Car
     const car = {
       name: req.body.name,
@@ -114,7 +123,14 @@ exports.findOne = (req, res) => {
 
 // Update a Car by the id in the request
 exports.update = (req, res) => {
-
+  const role = db.parseJwt(req.body.token).role;
+  if (role == 1) {
+    res.status(400).json({
+      success: false,
+      error: "You dont have permission"
+    });
+    return;
+  }
   Car.update(req.body, {
     where: { id: req.params.id }
   })
@@ -143,7 +159,14 @@ exports.update = (req, res) => {
 // Delete a Car with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
-
+  const role = db.parseJwt(req.body.token).role;
+  if (role == 1) {
+    res.status(400).json({
+      success: false,
+      error: "You dont have permission"
+    });
+    return;
+  }
   Car.destroy({
     where: { id: id }
   })
