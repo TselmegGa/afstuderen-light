@@ -6,11 +6,18 @@ var sequelize = new Sequelize('u55777p59727_callacar', 'u55777p59727_callacar', 
   host: 'web0086.zxcs.nl',
   dialect: 'mysql'
 });
+
+
 var db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.parseJwt = function(token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace('-', '+').replace('_', '/');
+  return JSON.parse(Buffer.from(base64, 'base64').toString());
+}
 db.address = require("./address")(sequelize, Sequelize);
 db.user = require("./user")(sequelize, Sequelize);
 db.car = require("./car")(sequelize, Sequelize);

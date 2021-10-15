@@ -146,7 +146,7 @@ exports.findOneByEmail = (req, res) => {
   User.findOne({ where: { email: req.body.email, password: req.body.password } })
     .then(data => {
       if (data) {
-        const accessToken = jwt.sign({ email: data.email,  role: data.role }, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+        const accessToken = jwt.sign({ email: data.email,  role: data.role }, process.env.TOKEN_SECRET);
         if(data.AddressId){
         Address.findByPk(data.AddressId).then(address => {
           if (address) {
@@ -194,9 +194,11 @@ exports.findOneByEmail = (req, res) => {
 // Update a User by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
-
+  const email = db.parseJwt(req.body.token).email;
+  
   User.findByPk(id)
       .then(data => {
+        if(data.email === email){
         if(req.body.address){
         if (data.AddressId == null) {
           Address.create(req.body.address).then(address => {
@@ -234,10 +236,15 @@ exports.update = (req, res) => {
       else{
         update(req,res)
       }
+    }else{
+      res.status(400).json({
+        success: false,
+        error: "You have permission to change this data" 
+      });
+    }
       })
 };
 function update(req, res){
-  console.log("i am here")
   User.update(req.body, {
     where: { id: req.params.id }
   })
@@ -265,7 +272,10 @@ function update(req, res){
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
-
+  const email = db.parseJwt(req.body.token).email;
+  User.findByPk(id)
+      .then(data => {
+        if(data.email === email){
   User.destroy({
     where: { id: id }
   })
@@ -288,4 +298,12 @@ exports.delete = (req, res) => {
         error: "Error trying to delete user" 
       });
     });
+  }
+  else{
+    res.status(400).json({
+      success: false,
+      error: "You have permission to change this data" 
+    });
+  }
+    })
 };

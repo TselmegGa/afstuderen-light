@@ -63,7 +63,7 @@ exports.findAllCarHistoryById = (req, res) => {
 exports.findUserHistoryById = (req, res) => {
 
   User.findByPk(req.params.id).then(user => {
-    if(user.privacy ){
+    if(user.privacy){
     UserHistory.findAll({where:{ UserId: req.params.id }})
     .then(data => {
       res.json({
