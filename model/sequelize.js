@@ -28,9 +28,7 @@ db.car.hasMany(db.car_history);
 db.car_history.belongsTo(db.car);
 db.address.hasOne(db.user);
 db.user.belongsTo(db.address);
-db.car.hasOne(db.user, {
-  foreignKey: 'pref_car'
-});
+db.car.hasOne(db.user);
 db.user.belongsTo(db.car);
 db.user.hasMany(db.user_history);
 db.user_history.belongsTo(db.user);

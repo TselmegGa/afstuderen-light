@@ -1,6 +1,7 @@
 const db = require("../model/sequelize");
 const User = db.user;
 const Address = db.address;
+const Car = db.car;
 const Op = db.Sequelize.Op;
 var jwt = require('jsonwebtoken');
 
@@ -88,7 +89,7 @@ function create(req, res, id){
 
 // Retrieve all User from the database.
 exports.findAll = (req, res) => {
-  User.findAll({ include: { model: Address } })
+  User.findAll({ include: [{ model: Address},{ model: Car }] })
     .then(data => {
       res.json({
         success: true,
@@ -108,24 +109,29 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
     
     User.findByPk(id)
-      .then(data => {
-        if (data) {
-          Address.findByPk(data.AddressId).then(address => {
-            if (address) {
+      .then(user => {
+        if (user) {
+          User.findOne({ where: { email: user.email}, include: [{ model: Address},{ model: Car }]}).then(data => {
+            if (data) {
+            
               res.json({
                 success: true,
-                model: {data, address}      
+                model: data
+              });
+              
+            } else {
+              res.status(404).json({
+                success: false,
+                error: "Cannot find user"
               });
             }
-              
           })
           .catch(err => {
             res.status(500).json({
               success: false,
-              error: "Error trying to get address" 
+              error: "Error trying to get user"
             });
           });
-          
         } else {
           res.status(404).json({
             success: false,
@@ -143,38 +149,15 @@ exports.findOne = (req, res) => {
 exports.findOneByEmail = (req, res) => {
   const id = req.params.id;
   
-  User.findOne({ where: { email: req.body.email, password: req.body.password } })
+  User.findOne({ where: { email: req.body.email, password: req.body.password }, include: [{ model: Address},{ model: Car }] })
     .then(data => {
       if (data) {
         const accessToken = jwt.sign({ email: data.email,  role: data.role }, process.env.TOKEN_SECRET);
-        if(data.AddressId){
-        Address.findByPk(data.AddressId).then(address => {
-          if (address) {
-            res.json({
-              success: true,
-              model: {data, address},
-              jwt: accessToken
-            });
-          }else {
-            res.status(404).json({
-              success: false,
-              error: "Cannot find address"
-            });
-          }
-        })
-        .catch(err => {
-          res.status(500).json({
-            success: false,
-            error: "Error trying to get address" 
-          });
-        });
-      } else {
         res.json({
           success: true,
-          model: data,
+          model: {data},
           jwt: accessToken
         });
-      }
         
       } else {
         res.status(404).json({
