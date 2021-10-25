@@ -26,6 +26,7 @@
   },
   "jest": {
     "collectCoverage":true,
+    "coverageReporters":["lcov"],
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
