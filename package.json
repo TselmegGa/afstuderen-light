@@ -21,12 +21,14 @@
   },
   "devDependencies": {
     "jest": "^27.3.1",
+    "jest-sonar-reporter": "^2.0.0",
     "supertest": "^6.1.6"
   },
   "jest": {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
-    ]
+    ],
+    "testResultsProcessor": "jest-sonar-reporter"
   }
 }
