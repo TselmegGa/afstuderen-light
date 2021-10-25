@@ -4,7 +4,8 @@ const { Sequelize } = require('sequelize');
 //sequelize
 var sequelize = new Sequelize('u55777p59727_callacar', 'u55777p59727_callacar', 'SXVNhrVFk', {
   host: 'web0086.zxcs.nl',
-  dialect: 'mysql'
+  dialect: 'mysql',
+  logging: false
 });
 
 

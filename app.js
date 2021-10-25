@@ -8,7 +8,6 @@ var dotenv = require('dotenv');
 
 var jwtAuth = require('./middleware/jwt');
 
-var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
 var carsRouter = require('./routes/cars');
@@ -34,7 +33,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', jwtAuth, usersRouter);
 app.use('/cars', jwtAuth, carsRouter);
