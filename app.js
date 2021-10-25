@@ -16,6 +16,7 @@ var historyRouter = require('./routes/history');
 var db = require("./model/sequelize");
 
 var app = express();
+app.disable("x-powered-by");
 
 // get config vars
 dotenv.config();
