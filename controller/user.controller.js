@@ -69,7 +69,7 @@ function create(req, res, id){
           privacy: req.body.privacy,
           AddressId: id,
         };
-        token =  jwt.sign({email: user.email,  role: user.role }, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
+        var token =  jwt.sign({email: user.email,  role: user.role }, process.env.TOKEN_SECRET, { expiresIn: '1800s' })
         // Save User in the database
         User.create(user)
           .then(data => {
@@ -147,7 +147,7 @@ exports.findOne = (req, res) => {
       });
 };
 exports.findOneByEmail = (req, res) => {
-  const id = req.params.id;
+
   
   User.findOne({ where: { email: req.body.email, password: req.body.password }, include: [{ model: Address},{ model: Car }] })
     .then(data => {
@@ -169,7 +169,7 @@ exports.findOneByEmail = (req, res) => {
     .catch(err => {
       res.status(500).json({
         success: false,
-        error: "Error trying to get user"
+        error: "Error trying to get user while logging"
       });
     });
 };
