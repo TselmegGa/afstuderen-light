@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="E:\Afstuderen light\tests\user.test.js">
-    <testCase name="GET /users respond with json" duration="92"/>
-    <testCase name="GET /users respond with json" duration="96"/>
+    <testCase name="GET /users respond with json" duration="156"/>
+    <testCase name="GET /users respond with json" duration="214"/>
   </file>
 </testExecutions>
