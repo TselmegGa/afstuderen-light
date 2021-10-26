@@ -15,7 +15,7 @@ exports.create = (req, res) => {
       });
       return;
     }
-    if (req.body.type == 0 ||req.body.type == 1 ||req.body.type == 2) {}
+    if (req.body.size == 0 ||req.body.size == 1 ||req.body.size == 2) {}
     else{
         res.status(400).json({
           success: false,
@@ -55,7 +55,7 @@ exports.create = (req, res) => {
     // Create a Car
     const car = {
       name: req.body.name,
-      type: req.body.type,
+      size: req.body.size,
       brand: req.body.brand,
       wheelchair: req.body.wheelchair,
       price: req.body.price
@@ -71,7 +71,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).json({
       success: false,
-      error: "Failed to create car!"
+      error: "Failed to create car!"+ err
       });
     });
     
