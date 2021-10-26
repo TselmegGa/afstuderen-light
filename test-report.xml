@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="E:\Afstuderen light\tests\user.test.js">
-    <testCase name="Auth tests should register new user" duration="31"/>
-    <testCase name="Auth tests respond with json" duration="32"/>
-    <testCase name="Auth tests should get users" duration="30"/>
-    <testCase name="Auth tests should get users" duration="11">
-      <failure message="Error: expect(received).toEqual(expected) // deep equality"><![CDATA[Error: expect(received).toEqual(expected) // deep equality
-
-Expected: "Failed to authenticate token."
-Received: undefined
-    at Object.<anonymous> (E:\Afstuderen light\tests\user.test.js:73:30)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
-    </testCase>
-    <testCase name="Auth tests should register new user" duration="41"/>
-    <testCase name="Auth tests should register new user" duration="53"/>
-    <testCase name="Auth tests respond with json" duration="36"/>
+    <testCase name="Auth tests should register new user" duration="44"/>
+    <testCase name="Auth tests should register new user without addrress" duration="26"/>
+    <testCase name="Auth tests should not register new user without firstname" duration="10"/>
+    <testCase name="Auth tests should not register new user without lastname" duration="9"/>
+    <testCase name="Auth tests should not register new user without email" duration="9"/>
+    <testCase name="Auth tests should login as user" duration="29"/>
+    <testCase name="Auth tests should give error with wrong token" duration="12"/>
+    <testCase name="Auth tests should give 404 status with wrong url" duration="23"/>
+    <testCase name="Auth tests should get users" duration="7"/>
+    <testCase name="Auth tests should get a single user" duration="49"/>
+    <testCase name="Auth tests should update a single user" duration="178"/>
+    <testCase name="Auth tests should register new car" duration="71"/>
+    <testCase name="Auth tests should not register new car without size" duration="11"/>
+    <testCase name="Auth tests should not register new car without brand" duration="10"/>
+    <testCase name="Auth tests should not register new car without wheelchair setting" duration="9"/>
+    <testCase name="Auth tests should not register new car without price" duration="11"/>
+    <testCase name="Auth tests should get cars" duration="23"/>
+    <testCase name="Auth tests should get a car" duration="24"/>
+    <testCase name="Auth tests should update a car" duration="39"/>
+    <testCase name="Auth tests should register new history" duration="66"/>
+    <testCase name="Auth tests should get all car history" duration="30"/>
+    <testCase name="Auth tests should get a car history" duration="32"/>
+    <testCase name="Auth tests should get user history" duration="46"/>
+    <testCase name="Auth tests should not get user history without permission" duration="81"/>
+    <testCase name="Auth tests should delete a single user" duration="44"/>
   </file>
 </testExecutions>

@@ -37,13 +37,13 @@ exports.create = (req, res) => {
         return;
       }
       if (req.body.Address) {
-        const Address ={
+        const address ={
         streetName:req.body.Address.streetName,
         houseNumber:req.body.Address.houseNumber,
         city:req.body.Address.city,
         zipCode:req.body.Address.zipCode
       }
-      Address.create(Address).then(data=>{
+      Address.create(address).then(data=>{
         create(req, res,data.id)
 
       }).catch(err => {
