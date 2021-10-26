@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="E:\Afstuderen light\tests\user.test.js">
-    <testCase name="GET /users respond with json" duration="156"/>
-    <testCase name="GET /users respond with json" duration="214"/>
+    <testCase name="Auth tests should register new user" duration="31"/>
+    <testCase name="Auth tests respond with json" duration="32"/>
+    <testCase name="Auth tests should get users" duration="30"/>
+    <testCase name="Auth tests should get users" duration="11">
+      <failure message="Error: expect(received).toEqual(expected) // deep equality"><![CDATA[Error: expect(received).toEqual(expected) // deep equality
+
+Expected: "Failed to authenticate token."
+Received: undefined
+    at Object.<anonymous> (E:\Afstuderen light\tests\user.test.js:73:30)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
+    </testCase>
+    <testCase name="Auth tests should register new user" duration="41"/>
+    <testCase name="Auth tests should register new user" duration="53"/>
+    <testCase name="Auth tests respond with json" duration="36"/>
   </file>
 </testExecutions>

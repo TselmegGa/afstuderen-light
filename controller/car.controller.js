@@ -15,7 +15,7 @@ exports.create = (req, res) => {
       });
       return;
     }
-    if (!req.body.type) {
+    if (req.body.type == 0 ||req.body.type == 1 ||req.body.type == 2) {
         res.status(400).json({
           success: false,
           error: "Type can not be empty!"

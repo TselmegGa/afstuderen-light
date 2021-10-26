@@ -36,20 +36,20 @@ exports.create = (req, res) => {
         });
         return;
       }
-      if (req.body.address) {
-        const address ={
-        streetName:req.body.address.streetName,
-        houseNumber:req.body.address.houseNumber,
-        city:req.body.address.city,
-        zipCode:req.body.address.zipCode
+      if (req.body.Address) {
+        const Address ={
+        streetName:req.body.Address.streetName,
+        houseNumber:req.body.Address.houseNumber,
+        city:req.body.Address.city,
+        zipCode:req.body.Address.zipCode
       }
-      Address.create(address).then(data=>{
+      Address.create(Address).then(data=>{
         create(req, res,data.id)
 
       }).catch(err => {
         res.status(500).json({
           success: false,
-          error: "Failed to create address"
+          error: "Failed to create Address"
         });
       });
       }else{
@@ -183,10 +183,10 @@ exports.update = (req, res) => {
   User.findByPk(id)
       .then(data => {
         if(data.email === email){
-        if(req.body.address){
+        if(req.body.Address){
         if (data.AddressId == null) {
-          Address.create(req.body.address).then(address => {
-            if (address) {
+          Address.create(req.body.Address).then(Address => {
+            if (Address) {
               update(req, res)
             }
               
@@ -194,25 +194,25 @@ exports.update = (req, res) => {
           .catch(err => {
             res.status(500).json({
               success: false,
-              error: "Error trying to create address" 
+              error: "Error trying to create Address" 
             });
           });
           
         } else {
-          Address.update(req.body.address, {where:{ id: data.AddressId }}).then(num => {
+          Address.update(req.body.Address, {where:{ id: data.AddressId }}).then(num => {
             if (num == 1) {
               update(req, res)
             }else {
               res.status(500).json({
                 success: false,
-                error: "Error while updating to get address" 
+                error: "Error while updating to get Address" 
               });
             }
           })
           .catch(err => {
             res.status(500).json({
               success: false,
-              error: "Error trying to update address"
+              error: "Error trying to update Address"
             });
           });
         }

@@ -6,10 +6,6 @@ var controller = require('../controller/user.controller');
 router.get('/', function(req, res, next) {
   controller.findAll(req, res);
 });
-router.post('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.get('/:id', function(req, res, next) {
   controller.findOne(req, res);
 });

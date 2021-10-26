@@ -5,7 +5,7 @@ module.exports = (sequelize, Sequelize) => {
     allowNull: false
   },
   size: {
-    type: Sequelize.BOOLEAN,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   brand: {
