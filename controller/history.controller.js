@@ -1,5 +1,6 @@
 const db = require("../model/sequelize");
 const Op = db.Sequelize.Op;
+const Sequelize = db.Sequelize;
 const User = db.user;
 const UserHistory = db.user_history;
 const CarHistory = db.car_history;
@@ -30,10 +31,11 @@ exports.create = (req, res) => {
       
 }
 exports.findAllCarHistoryLastDays = (req, res) => {
+  const threshold = new Date(Date.now()-7*24*60*60*1000);
   CarHistory.findAll(
     {
-      attributes: [[sequelize.fn('sum', sequelize.col('distance')), 'total']],
-      where:{ created:{[Op.gt] :Sequelize.literal('CURDATE() - INTERVAL 7 DAY'),[Op.lt]: NOW
+      attributes: [[Sequelize.fn('sum', Sequelize.col('distance')), 'total']],
+      where:{ startTime:{[Op.gt] : threshold,[Op.gt] : Date.now()
     }}})
     .then(data => {
       res.json({
@@ -44,7 +46,7 @@ exports.findAllCarHistoryLastDays = (req, res) => {
     .catch(err => {
       res.status(500).json({
         success: false,
-        error: "Error trying to get all user" 
+        error: err
       });
     });
 };
