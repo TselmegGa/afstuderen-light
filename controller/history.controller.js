@@ -1,5 +1,5 @@
 const db = require("../model/sequelize");
-const Op = Sequelize.Op;
+const Op = db.Sequelize.Op;
 const User = db.user;
 const UserHistory = db.user_history;
 const CarHistory = db.car_history;
