@@ -4,7 +4,7 @@ const User = db.user;
 const UserHistory = db.user_history;
 const CarHistory = db.car_history;
 
-// Create and Save a new User
+// Create and Save a new Usera
 exports.create = (req, res) => {
       
   UserHistory.create(req.body)
