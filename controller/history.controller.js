@@ -1,4 +1,5 @@
 const db = require("../model/sequelize");
+const Op = Sequelize.Op;
 const User = db.user;
 const UserHistory = db.user_history;
 const CarHistory = db.car_history;
@@ -28,6 +29,25 @@ exports.create = (req, res) => {
   })
       
 }
+exports.findAllCarHistoryLastDays = (req, res) => {
+  CarHistory.findAll(
+    {
+      attributes: [[sequelize.fn('sum', sequelize.col('distance')), 'total']],
+      where:{ created:{[Op.gt] :Sequelize.literal('CURDATE() - INTERVAL 7 DAY'),[Op.lt]: NOW
+    }}})
+    .then(data => {
+      res.json({
+        success: true,
+        model: {data}      
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        success: false,
+        error: "Error trying to get all user" 
+      });
+    });
+};
 exports.findAllCarHistory = (req, res) => {
   CarHistory.findAll()
     .then(data => {
@@ -62,8 +82,11 @@ exports.findAllCarHistoryById = (req, res) => {
 
 exports.findUserHistoryById = (req, res) => {
 
+  const token = req.body.token || req.param('token') || req.headers['x-access-token'];
+  const email = db.parseJwt(token).email;
+
   User.findByPk(req.params.id).then(user => {
-    if(user.privacy){
+    if(user.privacy || user.email == email){
     UserHistory.findAll({where:{ UserId: req.params.id }})
     .then(data => {
       res.json({

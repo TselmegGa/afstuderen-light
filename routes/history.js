@@ -16,6 +16,9 @@ router.post('/', function(req, res, next) {
 router.get('/user/:id', function(req, res, next) {
   controller.findUserHistoryById(req, res);
 });
+router.get('/user/total', function(req, res, next) {
+  controller.findAllCarHistoryLastDays(req, res);
+});
 
 
 module.exports = router;
