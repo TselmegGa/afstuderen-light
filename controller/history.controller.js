@@ -32,7 +32,6 @@ exports.create = (req, res) => {
 exports.findAllCarHistoryLastDays = (req, res) => {
   CarHistory.findAll(
     {
-      attributes: [[sequelize.fn('sum', sequelize.col('distance')), 'total']],
       where:{ created:{[Op.gt] :Sequelize.literal('CURDATE() - INTERVAL 7 DAY'),[Op.lt]: NOW
     }}})
     .then(data => {
